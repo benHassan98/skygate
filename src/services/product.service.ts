@@ -104,7 +104,7 @@ export class ProductService {
     try {
       await this.dateSource.manager.query("BEGIN");
       let result;
-      const exist = await this.dateSource.manager.query("SELECT id FROM products WHERE id = $1", [id]);
+      const exist = await this.dateSource.manager.query("SELECT id FROM products WHERE id = $1 FOR UPDATE", [id]);
       if (exist.length === 0) {
         await this.dateSource.manager.query("COMMIT");
         throw new NotFoundException({
