@@ -11,7 +11,9 @@ export const CreateProductSchema = z.object({
 
   type: z.enum(["public", "private"]).default("public"),
 
-  price: z.coerce.number().gt(0).refine(val => Number(val * 100).toString().split('.').length === 1),
+  price: z.coerce.number().gt(0).refine(val => Number(val * 100).toString().split('.').length === 1, {
+    error: "price should have only 2 decimal points maximum"
+  }),
 
   discountPrice: z.coerce.number().gte(0),
 

@@ -18,7 +18,7 @@ export class BasicGuard implements CanActivate {
         }]
       });
     }
-    if (!this.roles.includes(role)) {
+    if (!this.roles.includes(role.toLowerCase())) {
       throw new ForbiddenException({
         code: "FORBIDDEN",
         details: [{

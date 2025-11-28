@@ -12,7 +12,10 @@ type type_status default 'public',
 price decimal(10, 2) not null,
 discount_price decimal(10, 2),
 quantity int not null,
-created_date timestamp default NOW(),
-updated_date timestamp default NOW()
+createdAt timestamp default NOW(),
+updatedAt timestamp default NOW()
 );
+CREATE INDEX products_idx products(id) INCLUDE(sku, category, type)
+CREATE INDEX products_sku_idx products(sku) INCLUDE(id, category, type)
+CREATE INDEX products_category_idx products(category) INCLUDE(id, sku, type)
 
